@@ -32,6 +32,13 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    public void DisableMenus()
+    {
+        for(int i = 0; i < uiElements.Length; i++)
+        {
+            uiElements[i].SetActive(false);
+        }
+    }
     public GameObject[] UIElements
     {
         get { return uiElements; }

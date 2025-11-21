@@ -12,6 +12,8 @@ public class PlayerBehavior : MonoBehaviour
         playerInput = new PlayerInput();
         playerInput.Owner = character;
         cameraControl.SetDifference();
+        character.Alive = true;
+        character.Animator.SetBool("Alive", true);
     }
 
     private void Start()

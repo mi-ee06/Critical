@@ -23,7 +23,11 @@ public class Character : MonoBehaviour
     {
         if(isPlayer)
         {
-            transform.position = startPosition;
+            Debug.Log("Death method called");
+            alive = false;
+            animator.SetBool("Alive", false);
+            Invoke("ResetDeathAnimation", 0.1f);
+            Invoke("GameOverScreen", 3f);
         }
         else { Destroy(this.gameObject); }
     }
@@ -52,5 +56,19 @@ public class Character : MonoBehaviour
     public Animator Animator
     {
         get { return animator; }
+    }
+    public void ResetToStart()
+    {
+        transform.position = startPosition;
+    }
+    public void GameOverScreen()
+    {
+        Debug.Log("Displaying Game Over Screen");
+        gameManager.GameOver();
+    }
+    public void ResetDeathAnimation()
+    {
+        Debug.Log("Stopping animations");
+        animator.SetBool("Alive", true);
     }
 }
