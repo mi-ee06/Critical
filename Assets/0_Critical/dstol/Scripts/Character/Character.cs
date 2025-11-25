@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
             Invoke("GameOverScreen", 3f);
             characterMovement.Rb.linearVelocity = new Vector3(0f, characterMovement.Rb.linearVelocity.y, 0f);
         }
-        else { Destroy(this.gameObject); }
+        else　if(!isPlayer) { Destroy(this.gameObject); }
     }
     public GameManager GameManager
     {
