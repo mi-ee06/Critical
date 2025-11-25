@@ -28,6 +28,7 @@ public class Character : MonoBehaviour
             animator.SetBool("Alive", false);
             Invoke("ResetDeathAnimation", 0.1f);
             Invoke("GameOverScreen", 3f);
+            characterMovement.Rb.linearVelocity = new Vector3(0f, characterMovement.Rb.linearVelocity.y, 0f);
         }
         else { Destroy(this.gameObject); }
     }

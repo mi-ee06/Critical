@@ -240,4 +240,8 @@ public class Movement : MonoBehaviour
     {
         set { stepping = value; }
     }
+    public Rigidbody Rb
+    {
+        get { return rb; }
+    }
 }
