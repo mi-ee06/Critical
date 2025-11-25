@@ -21,7 +21,7 @@ public class Character : MonoBehaviour
 
     public void Die()
     {
-        if(isPlayer)
+        if(isPlayer && alive)
         {
             Debug.Log("Death method called");
             alive = false;
