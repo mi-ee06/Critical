@@ -60,6 +60,10 @@ public class Character : MonoBehaviour
     public void ResetToStart()
     {
         transform.position = startPosition;
+        alive = true;
+        gameManager.UIManager.DisableMenus();
+        animator.SetBool("Reset", true);
+        Invoke("ResetReset", 1f);
     }
     public void GameOverScreen()
     {
@@ -70,5 +74,9 @@ public class Character : MonoBehaviour
     {
         Debug.Log("Stopping animations");
         animator.SetBool("Alive", true);
+    }
+    public void ResetReset()
+    {
+        animator.SetBool("Reset", false);
     }
 }

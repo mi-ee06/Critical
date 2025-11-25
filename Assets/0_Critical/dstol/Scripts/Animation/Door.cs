@@ -2,43 +2,88 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed;
-    [SerializeField] private float minAngle;
-    [SerializeField] private float maxAngle;
+    [SerializeField] private GameObject oppositePosition;
+    [SerializeField] private bool locked;
+    private bool toBeLocked;
+    [SerializeField] private float openSpeed;
+    [SerializeField] private float closeSpeed;
+    private float openHeight;
+    private float closedHeight;
     [SerializeField] private bool open;
     [SerializeField] private DoorBehavior doorBehavior;
-    [SerializeField] private Door otherDoor;
+    private float originalHeight;
 
-    public void Open()
+    public void OpenDoor()
     {
-        if (open) return;
-        Vector3 euler = transform.localEulerAngles;
-        euler.y += rotationSpeed * Time.deltaTime;
-        transform.localEulerAngles = euler;
-        ClampRotation();
+        if(locked)
+        {
+            return;
+        }
+        transform.position = new Vector3(transform.position.x,
+            Mathf.Clamp(transform.position.y + openSpeed * Time.deltaTime, closedHeight, openHeight),
+            transform.position.z);
+        if(transform.position.y <= openHeight)
+        {
+            open = true;
+            if(toBeLocked)
+            {
+                locked = true;
+            }
+        }
     }
-    public void Close()
+    public void CloseDoor()
     {
-        if (!open) return;
-        Vector3 euler = transform.localEulerAngles;
-        euler.y -= rotationSpeed * Time.deltaTime;
-        transform.localEulerAngles = euler;
-        ClampRotation();
+        if(locked)
+        {
+            return;
+        }
+        transform.position = new Vector3(transform.position.x,
+            Mathf.Clamp(transform.position.y - closeSpeed * Time.deltaTime, closedHeight, openHeight),
+            transform.position.z);
+        if(transform.position.y >= closedHeight)
+        {
+            open = false;
+            if(toBeLocked)
+            {
+                locked = true;
+            }
+        }
     }
-    private void ClampRotation()
+    public void InitializeHeight()
     {
-        transform.localEulerAngles = new Vector3(
-            transform.localEulerAngles.x,
-            Mathf.Clamp(transform.localEulerAngles.y, minAngle, maxAngle),
-            transform.localEulerAngles.z
-            );
+        originalHeight = transform.position.y;
+        if(open)
+        {
+            openHeight = originalHeight;
+            closedHeight = oppositePosition.transform.position.y;
+        }
+        else
+        {
+            closedHeight = originalHeight;
+            openHeight = oppositePosition.transform.position.y;
+        }
     }
-    public bool Closed
+    public bool Open
     {
-        get { return !open; }
+        get { return open; }
     }
-    public Door OtherDoor
+    public float OpenHeight
     {
-        get { return otherDoor; }
+        get { return openHeight; }
+        set { openHeight = value; }
+    }
+    public float ClosedHeight
+    {
+        get { return closedHeight; }
+        set { closedHeight = value; }
+    }
+    public DoorBehavior DoorBehavior
+    {
+        get { return doorBehavior; }
+    }
+    public bool ToBeLocked
+    {
+        get { return toBeLocked; }
+        set { toBeLocked = value; }
     }
 }

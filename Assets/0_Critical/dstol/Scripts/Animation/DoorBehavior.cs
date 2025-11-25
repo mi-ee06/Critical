@@ -5,12 +5,13 @@ public class DoorBehavior : MonoBehaviour
     public bool closing;
     public bool opening;
     [SerializeField] private Door door;
-    [SerializeField] GameObject button;
+    [SerializeField] private GameObject button;
 
     void Awake()
     {
         closing = false;
         opening = false;
+        door.InitializeHeight();
     }
     void Start()
     {
@@ -23,19 +24,7 @@ public class DoorBehavior : MonoBehaviour
     {
         if(opening)
         {
-            door.Open();
-            if (door.OtherDoor != null)
-            {
-                door.OtherDoor.Open();
-            }
-        }
-        if(closing)
-        {
-            door.Close();
-            if (door.OtherDoor != null)
-            {
-                door.OtherDoor.Close();
-            }
+            door.OpenDoor();
         }
     }
     void OnTriggerStay()
@@ -48,13 +37,13 @@ public class DoorBehavior : MonoBehaviour
             {
                 button.SetActive(false);
             }
-            if(door.Closed)
-            {
-                opening = true;
-            }
-            if(!door.Closed)
+            if(door.Open)
             {
                 closing = true;
+            }
+            if(!door.Open)
+            {
+                opening = true;
             }
         }
     }
