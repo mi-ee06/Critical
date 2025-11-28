@@ -11,6 +11,9 @@ public class JumpState:IState<SlimeStateData>
     private readonly Transform _playerTf;
 
     private float JumpStopCount;
+
+    private GameObject _normalCore;
+    private GameObject _jumpCore;
     public JumpState(SlimeRefs refs, Transform playerTf)
     {
         _refs = refs;
@@ -50,12 +53,14 @@ public class JumpState:IState<SlimeStateData>
 
         if (stateInfo.normalizedTime > 0.7 && stateInfo.normalizedTime<1)
         {
+            rakka();
             Vector3 a = _refs.target.localPosition;
             a.y -= 20 * Time.deltaTime;
             _refs.target.localPosition = a;
         }
         if(stateInfo.normalizedTime >= 1)
         {
+            rakka();
             JumpStopCount += Time.deltaTime;
             if (JumpStopCount > 1.5)
             {
@@ -79,9 +84,17 @@ public class JumpState:IState<SlimeStateData>
     }
     public void Exit()
     {
+        _refs.normalCore.SetActive(true);
+        _refs.jumpCore.SetActive(false);
         Vector3 a=_refs.target.localPosition;
         a.y = firstY;
         _refs.target.localPosition = a;
         JumpStopCount = 0;
+    }
+
+    private void rakka()
+    {
+        _refs.normalCore.SetActive(false);
+        _refs.jumpCore.SetActive(true);
     }
 }

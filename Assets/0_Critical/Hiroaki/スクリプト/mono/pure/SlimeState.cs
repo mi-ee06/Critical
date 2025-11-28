@@ -20,6 +20,8 @@ public class SlimeState : IState<BossStateData>
         SlimeController SC = obj.GetComponent<SlimeController>();
         _refs.target = SC.target;
         _refs.animator = SC.animator;
+        _refs.normalCore=SC.normalCore;
+        _refs.jumpCore=SC.jumpCore;
         //_refs.core = SC.core;
         _slimeSM.Enter();
     }
