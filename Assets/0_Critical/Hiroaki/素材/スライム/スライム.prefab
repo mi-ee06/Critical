@@ -220,6 +220,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3147517381680218924}
   target: {fileID: 1043559780716220699}
+  normalCore: {fileID: 5625397817991955013}
+  jumpCore: {fileID: 179135873388563439}
 --- !u!1 &5625397817991955013
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,6 +50,8 @@ public class JumpState:IState<SlimeStateData>
 
         if (stateInfo.normalizedTime > 0.7 && stateInfo.normalizedTime<1)
         {
+            _refs.normalCore.SetActive(false);
+            _refs.jumpCore.SetActive(true);
             Vector3 a = _refs.target.localPosition;
             a.y -= 20 * Time.deltaTime;
             _refs.target.localPosition = a;
@@ -79,6 +81,8 @@ public class JumpState:IState<SlimeStateData>
     }
     public void Exit()
     {
+        _refs.normalCore.SetActive(true);
+        _refs.jumpCore.SetActive(false);
         Vector3 a=_refs.target.localPosition;
         a.y = firstY;
         _refs.target.localPosition = a;
