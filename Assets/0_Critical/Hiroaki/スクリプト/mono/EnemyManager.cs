@@ -27,7 +27,8 @@ public class EnemyManager:MonoBehaviour
     private StateMachine<BossStateData> CreateBossSM()
     {
         SlimeState slime = new(CreateSlimeSM(),SlimePrefab,slimeRefs);
-        BossStateData data = new(slime);
+        CloudState cloud = new CloudState();
+        BossStateData data = new(slime,cloud);
         return new StateMachine<BossStateData>(data);
     }
 

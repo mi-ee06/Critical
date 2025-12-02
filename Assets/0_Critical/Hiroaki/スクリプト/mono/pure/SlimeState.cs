@@ -7,6 +7,7 @@ public class SlimeState : IState<BossStateData>
     private readonly StateMachine<SlimeStateData> _slimeSM;
     private readonly GameObject _slimePrefab;
     private readonly SlimeRefs _refs;
+    private bool defeated;
     public SlimeState(StateMachine<SlimeStateData> slimeSM, GameObject slimePrefab,SlimeRefs refs)
     {
         _slimeSM = slimeSM;
@@ -22,7 +23,10 @@ public class SlimeState : IState<BossStateData>
         _refs.animator = SC.animator;
         _refs.normalCore = SC.normalCore;
         _refs.jumpCore = SC.jumpCore;
-        //_refs.core = SC.core;
+        _refs.core_normal= SC.core_normal;
+        _refs.core_jump= SC.core_jump;
+        _refs.core_normal.defeat += Exit;
+        _refs.core_jump.defeat += Exit;
         _slimeSM.Enter();
     }
     public TriggerId? Tick(BossStateData data)

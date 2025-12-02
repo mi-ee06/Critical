@@ -6,4 +6,6 @@ public class SlimeController:MonoBehaviour
     public Transform target;
     public GameObject normalCore;
     public GameObject jumpCore;
+    public SlimeCore core_normal;
+    public SlimeCore core_jump;
 }

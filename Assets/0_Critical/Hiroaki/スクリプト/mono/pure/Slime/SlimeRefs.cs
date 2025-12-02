@@ -6,4 +6,6 @@ public class SlimeRefs
     public Animator animator;
     public GameObject normalCore;
     public GameObject jumpCore;
+    public SlimeCore core_normal;
+    public SlimeCore core_jump;
 }
