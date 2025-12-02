@@ -16,8 +16,8 @@ public class Player : MonoBehaviour
     void Update()
     {
        
-        // Shift‚¨‚µ‚È‚ª‚ç•Ší‚«‚è‚©‚¦
-        if (Input.GetKey(KeyCode.LeftShift))
+        // Tab‚¨‚µ‚È‚ª‚ç•Ší‚«‚è‚©‚¦
+        if (Input.GetKey(KeyCode.Tab))
         {
             if (Input.GetKeyDown(KeyCode.Alpha1)) inventory.switchWeapon(0);
             if (Input.GetKeyDown(KeyCode.Alpha2)) inventory.switchWeapon(1);
