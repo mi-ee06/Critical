@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OnRoom:MonoBehaviour
+public class OnRoom : MonoBehaviour
 {
     public bool OnBossRoom;
     private void OnTriggerEnter()

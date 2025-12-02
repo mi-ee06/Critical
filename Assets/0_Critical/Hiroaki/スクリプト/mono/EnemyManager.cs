@@ -13,7 +13,7 @@ public class EnemyManager:MonoBehaviour
     {
         slimeRefs = new();
         bossSM = CreateBossSM();
-       bossSM.Enter();
+        bossSM.Enter();
     }
     public void Update()
     {
@@ -27,12 +27,12 @@ public class EnemyManager:MonoBehaviour
     private StateMachine<BossStateData> CreateBossSM()
     {
         SlimeState slime = new(CreateSlimeSM(),SlimePrefab,slimeRefs);
-        CloudState cloud = new CloudState();
+        CloudState cloud = new CloudState(CreateCloudSM());
         BossStateData data = new(slime,cloud);
         return new StateMachine<BossStateData>(data);
     }
 
-    private StateMachine<SlimeStateData>CreateSlimeSM()
+    private StateMachine<SlimeStateData> CreateSlimeSM()
     {
         SlimeStateData data = new(
             new IdleState(slimeRefs,onRoom),
@@ -40,5 +40,11 @@ public class EnemyManager:MonoBehaviour
             new JumpState(slimeRefs,PlayerTf),
             new ReturnState(slimeRefs));
         return new StateMachine<SlimeStateData>(data);
+    }
+    private StateMachine<CloudStateData> CreateCloudSM()
+    {
+        CloudStateData data = new(
+            new CloudWaitState());
+        return new StateMachine<CloudStateData>(data);
     }
 }
