@@ -8,11 +8,11 @@ public class Inventory
 
     public IWeapon CurrentWeapon => currentWeapon;
 
-    public Inventory(IWeapon daggerweapon,IWeapon swordweapon,IWeapon axweapon) { 
+    public Inventory(IWeapon daggerweapon,IWeapon swordweapon,IWeapon axeweapon) { 
         currentWeapon = swordweapon;
         IWeapons.Add(daggerweapon);
         IWeapons.Add(swordweapon);
-        IWeapons.Add(axweapon);
+        IWeapons.Add(axeweapon);
     }
     public void Attack()
     {
