@@ -1467,6 +1467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiManager: {fileID: 964923425}
   pauseUiIndex: 0
+  gameOverIndex: 0
   bgmManager: {fileID: 964923424}
 --- !u!4 &964923427
 Transform:
