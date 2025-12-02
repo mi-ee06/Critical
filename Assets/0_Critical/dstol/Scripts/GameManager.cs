@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int gameOverIndex;
     [SerializeField] private BGMManager bgmManager;
 
+    private int enemyCount;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -17,11 +17,11 @@ public class Character : MonoBehaviour
      * [SerializeField] private Skill[] skills;
      * [SerializeField] private Skill activeSkill;
      */
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
+    
     public void Die()
     {
-        if(isPlayer && alive)
+        if (!alive) return;
+        if(isPlayer)
         {
             Debug.Log("Death method called");
             alive = false;
@@ -30,7 +30,7 @@ public class Character : MonoBehaviour
             Invoke("GameOverScreen", 3f);
             characterMovement.Rb.linearVelocity = new Vector3(0f, characterMovement.Rb.linearVelocity.y, 0f);
         }
-        else　if(!isPlayer) { Destroy(this.gameObject); }
+        else { Destroy(this.gameObject); }
     }
     public GameManager GameManager
     {
