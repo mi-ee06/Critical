@@ -24,4 +24,9 @@ public class Inventory
         currentWeapon = IWeapons[number];
       
     }
+
+    public IWeapon CurrentWeapon
+    {
+        get { return currentWeapon; }
+    }
 }
