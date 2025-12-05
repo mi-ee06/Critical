@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Sword:IWeapon
 {
-    public void Attack()
+    public override void Attack()
     {
-        Debug.Log("Œ•‚ÅUŒ‚‚µ‚½I");
+        Debug.Log("ï¿½ï¿½ï¿½ÅUï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I");
     }
 }

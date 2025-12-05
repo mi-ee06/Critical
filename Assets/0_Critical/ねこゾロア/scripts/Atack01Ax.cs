@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Ax: IWeapon
 {
-    public void Attack()
+    public override void Attack()
     {
-        Debug.Log("•€‚ÅUŒ‚‚µ‚½I");
+        Debug.Log("ï¿½ï¿½ï¿½ÅUï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I");
     }
 }

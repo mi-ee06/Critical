@@ -3,8 +3,8 @@ using UnityEngine;
 public class Dagger:IWeapon
 {
 
-    public void Attack()
+    public override void Attack()
     {
-        Debug.Log("’ZŒ•‚ÅUŒ‚‚µ‚½I");
+        Debug.Log("ï¿½Zï¿½ï¿½ï¿½ÅUï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½I");
     }
 }

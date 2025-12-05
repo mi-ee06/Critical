@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public interface IWeapon
+public abstract class IWeapon
 {
-    void Attack();
+    public float attackTime;
+
+    public abstract void Attack();
 }

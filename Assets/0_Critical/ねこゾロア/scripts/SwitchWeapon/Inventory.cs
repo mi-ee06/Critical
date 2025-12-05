@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Inventory
 {
+    [SerializeField] private KillEnemyTrigger killEnemyTrigger;
     private IWeapon currentWeapon;
     private List<IWeapon> IWeapons = new List<IWeapon>();
 
@@ -16,6 +17,7 @@ public class Inventory
     }
     public void Attack()
     {
+        killEnemyTrigger.gameObject.SetActive(true);
         currentWeapon.Attack();
     }
     public void switchWeapon(int number)
