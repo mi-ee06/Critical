@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Inventory
 {
+    [SerializeField] private KillEnemyTrigger killEnemyTrigger;
+    [SerializeField] private Character owner;
     private IWeapon currentWeapon;
     private List<IWeapon> IWeapons = new List<IWeapon>();
 
@@ -14,14 +16,20 @@ public class Inventory
         IWeapons.Add(swordweapon);
         IWeapons.Add(axeweapon);
     }
+
     public void Attack()
     {
+        if (!currentWeapon.canAttack) return;
+
+        currentWeapon.canAttack = false;
+        killEnemyTrigger.gameObject.SetActive(true);
         currentWeapon.Attack();
+        owner.Animator.Play(currentWeapon.attackAnimation);
+
     }
+
     public void switchWeapon(int number)
     {
-
         currentWeapon = IWeapons[number];
-      
     }
 }
