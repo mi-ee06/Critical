@@ -7,6 +7,7 @@ public class PlayerInput
     [SerializeField] Character owner;
     [SerializeField] private float lateralInput;//右左行動入力
     [SerializeField] private bool jumpInput;
+
     private bool jumpHeld;
     public bool previousJumpHeld;
     private bool stepInput;
@@ -35,7 +36,13 @@ public class PlayerInput
         owner.CharacterMovement.JumpInput = jumpInput;
         owner.CharacterMovement.JumpHeld = jumpHeld;
         owner.CharacterMovement.StepInput = stepInput;
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            owner.GameManager.TogglePause();
+        }
     }
+
     public Character Owner
     {
         set { owner = value; }

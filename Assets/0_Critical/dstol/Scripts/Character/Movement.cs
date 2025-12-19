@@ -4,11 +4,14 @@ using UnityEngine;
  */
 public class Movement : MonoBehaviour
 {
+    [SerializeField] private bool canMove; //行動可能
+
     private float lateralMovement; //右左行動入力
     private bool jumpInput; //ジャンプ入力
     private bool jumpHeld; //ジャンプボタン長押ししてるか
     private bool jumpReleased; //ジャンプ入力が消えたらこれが一瞬だけTrueになる。長押しの高いジャンプのメソッドに使う
     private bool stepInput; //ステップ入力
+    private int directionFaced;
 
     [SerializeField] private Character owner;//どのキャラに繋がってる
 
@@ -49,9 +52,24 @@ public class Movement : MonoBehaviour
          */
         if (owner.Alive)
         {
-            if (!stepping)
+            if (directionFaced != 1 && lateralMovement < 0f)
+            {
+                directionFaced = 1;
+                transform.rotation = Quaternion.Euler(new Vector3(0f, 180f, 0f));
+            }
+            if(directionFaced != 2 && lateralMovement > 0f)
+            {
+                directionFaced = 2;
+                transform.rotation = Quaternion.Euler(Vector3.zero);
+            }
+            if (!stepping && canMove)
             {
                 rb.linearVelocity = new Vector3(lateralMovement * speed, rb.linearVelocity.y, 0f);
+                if (Mathf.Abs(lateralMovement) > 0f && grounded)
+                {
+                    owner.Animator.SetBool("Moving", true);
+                }
+                else { owner.Animator.SetBool("Moving", false); }
             }
             if (jumpInput)
             {
@@ -74,6 +92,10 @@ public class Movement : MonoBehaviour
          */
         if(canJump)
         {
+            owner.Animator.SetBool("Jumping", false);
+            owner.Animator.Update(0f);
+            owner.Animator.SetBool("Jumping", true);
+            Invoke("ResetJumping", 0.5f);
             previousJumps++;
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpPower + rb.linearVelocity.y * conservedVerticalMomentum, rb.linearVelocity.z);
         }
@@ -92,7 +114,13 @@ public class Movement : MonoBehaviour
          * キャラが地面に触れてるか探索する
          */
         grounded = Physics.Raycast(feet.transform.position, Vector3.down, groundedCheckDistance, groundLayer) && rb.linearVelocity.y < jumpPower * 0.3f;
-        return grounded;
+        if(grounded)
+        {
+            owner.Animator.SetBool("Grounded", true);
+            owner.Animator.SetBool("Jumping", false);
+        }
+        else { owner.Animator.SetBool("Grounded", false); }
+            return grounded;
     }
     public void ManageJumps()
     {
@@ -152,7 +180,9 @@ public class Movement : MonoBehaviour
         }
         rb.linearVelocity = rb.linearVelocity + Vector3.right * stepDirection * stepSpeed * 1.1f;
         canStep = false;
+        canMove = false;
         stepping = true;
+        owner.Animator.SetBool("Stepping", true);
     }
     private void ManageStep()
     {
@@ -171,6 +201,7 @@ public class Movement : MonoBehaviour
         //ステップを止める
         rb.linearVelocity = Vector3.zero;
         stepping = false;
+        owner.Animator.SetBool("Stepping", false);
         Invoke("StepCooldown", stepCooldown);
         stepDirection = 0;
         Debug.Log("Step Complete");
@@ -179,6 +210,11 @@ public class Movement : MonoBehaviour
     {
         Debug.Log("Resetting Step");
         canStep = true;
+        canMove = true;
+    }
+    private void ResetJumping()
+    {
+        owner.Animator.SetBool("Jumping", false);
     }
     public bool StepInput
     {
@@ -203,5 +239,9 @@ public class Movement : MonoBehaviour
     public bool Stepping
     {
         set { stepping = value; }
+    }
+    public Rigidbody Rb
+    {
+        get { return rb; }
     }
 }
