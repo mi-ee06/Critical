@@ -5,6 +5,11 @@ public class ShowUIWhileTabPressed : MonoBehaviour
     public bool Openweapon;
     public GameObject uiPanel;
 
+    void Start()
+    {
+        Openweapon = false;
+        uiPanel.SetActive(false);
+    }
     void Update()
     {
         if (Input.GetKey(KeyCode.Tab))

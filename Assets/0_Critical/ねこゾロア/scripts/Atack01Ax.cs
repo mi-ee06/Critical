@@ -4,6 +4,6 @@ public class Ax: IWeapon
 {
     public override void Attack()
     {
-        Debug.Log("���ōU�������I");
+        Debug.Log("Attacked with an ax!");
     }
 }
