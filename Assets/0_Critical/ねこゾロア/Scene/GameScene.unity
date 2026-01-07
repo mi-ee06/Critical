@@ -3282,7 +3282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Openweapon: 0
-  uiPanel: {fileID: 0}
+  uiPanel: {fileID: 316704803}
 --- !u!4 &1449882066
 Transform:
   m_ObjectHideFlags: 0

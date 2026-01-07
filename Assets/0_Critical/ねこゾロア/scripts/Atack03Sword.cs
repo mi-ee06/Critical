@@ -4,6 +4,6 @@ public class Sword:IWeapon
 {
     public override void Attack()
     {
-        Debug.Log("���ōU�������I");
+        Debug.Log("attacked with a sword!");
     }
 }
