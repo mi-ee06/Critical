@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
             Debug.Log("Death method called");
             alive = false;
             animator.SetBool("Alive", false);
-            Invoke("ResetDeathAnimation", 0.2f);
+            Invoke("ResetDeathAnimation", 0.1f);
             Invoke("GameOverScreen", 3f);
             characterMovement.Rb.linearVelocity = new Vector3(0f, characterMovement.Rb.linearVelocity.y, 0f);
         }
