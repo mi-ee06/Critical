@@ -21,6 +21,7 @@ public class PlayerBehavior : MonoBehaviour
         character.StartPosition = transform.position;
         playerInput.previousJumpHeld = false;
         movement.Stepping = false;
+        character.WeaponVolume.SetActive(false);
     }
 
     void Update()
