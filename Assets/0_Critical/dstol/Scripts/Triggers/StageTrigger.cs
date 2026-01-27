@@ -8,6 +8,7 @@ public class StageTrigger : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            Debug.Log("Attempting to change scene");
             SceneManager.LoadScene(sceneName);
         }
     }

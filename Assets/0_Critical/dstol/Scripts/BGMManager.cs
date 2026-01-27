@@ -5,7 +5,13 @@ public class BGMManager : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] bgms;
+    [SerializeField] private int initialTrack;
     private float seVolume;
+
+    private void Start()
+    {
+        PlayInitialTrack(initialTrack); //基本的に休憩BGMを流す
+    }
 
     public void LoadAllTracks()
     {
@@ -21,6 +27,12 @@ public class BGMManager : MonoBehaviour
             return;
         }
         ChangeTrack(bgms[track]);
+    }
+    public void PlayInitialTrack(int index)
+    {
+        if(initialTrack < 0) return;
+
+        PlayTrack(initialTrack);
     }
     public void ChangeTrack(AudioClip clip)
     {
