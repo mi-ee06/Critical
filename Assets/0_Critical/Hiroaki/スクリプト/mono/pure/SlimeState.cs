@@ -8,6 +8,7 @@ public class SlimeState : IState<BossStateData>
     private readonly GameObject _slimePrefab;
     private readonly SlimeRefs _refs;
     private bool defeated;
+    private bool make;
     public SlimeState(StateMachine<SlimeStateData> slimeSM, GameObject slimePrefab,SlimeRefs refs)
     {
         _slimeSM = slimeSM;
@@ -25,18 +26,27 @@ public class SlimeState : IState<BossStateData>
         _refs.jumpCore = SC.jumpCore;
         _refs.core_normal= SC.core_normal;
         _refs.core_jump= SC.core_jump;
-        _refs.core_normal.defeat += Exit;
-        _refs.core_jump.defeat += Exit;
+        _refs.core_normal.defeat += def;
+        _refs.core_jump.defeat += def;
         _slimeSM.Enter();
     }
     public TriggerId? Tick(BossStateData data)
     {
         _slimeSM.Tick();
+        if (make)
+        {
+            return data.CloudTrigger;
+        }
         return null;
     }
     public void Exit()
     {
+        make = false;
         Object.Destroy(obj);
         _slimeSM.Exit();
+    }
+    private void def()
+    {
+        make = true;
     }
 }

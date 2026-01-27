@@ -44,7 +44,7 @@ public class EnemyManager:MonoBehaviour
     private StateMachine<CloudStateData> CreateCloudSM()
     {
         CloudStateData data = new(
-            new CloudWaitState());
+            new CloudWaitState(onRoom));
         return new StateMachine<CloudStateData>(data);
     }
 }
