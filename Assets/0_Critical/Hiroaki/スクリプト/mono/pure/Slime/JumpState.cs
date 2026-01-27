@@ -81,6 +81,8 @@ public class JumpState:IState<SlimeStateData>
     }
     public void Exit()
     {
+        if (_refs == null) return;
+
         _refs.normalCore.SetActive(true);
         _refs.jumpCore.SetActive(false);
         Vector3 a=_refs.target.localPosition;

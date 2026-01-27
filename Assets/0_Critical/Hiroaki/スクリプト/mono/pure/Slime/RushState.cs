@@ -33,7 +33,10 @@ public class RushState:IState<SlimeStateData>
     }
     public TriggerId? Tick(SlimeStateData data)
     {
+        if (data == null || _refs == null) return null;
+
         var _stateInfo = _refs.animator.GetCurrentAnimatorStateInfo(0);
+
         if (_stateInfo.IsName("PreRush"))
         {
             if (_stateInfo.normalizedTime >= 1)
