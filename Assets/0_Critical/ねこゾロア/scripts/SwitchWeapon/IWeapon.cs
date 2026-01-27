@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public abstract class IWeapon
+public class IWeapon : MonoBehaviour
 {
     public float     attackTime;
     public bool      canAttack;
     public string    attackAnimation;
 
-    public abstract void Attack();
+    public void Attack()
+    {
+
+    }
 }

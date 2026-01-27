@@ -11,12 +11,11 @@ public class Character : MonoBehaviour
 
     [SerializeField] private Movement characterMovement;
     [SerializeField] private bool isPlayer;
-    /*
-     * [SerializeField] private Weapon[] weapons
-     * [SerializeField] private Weapon activeWeapon;
-     * [SerializeField] private Skill[] skills;
-     * [SerializeField] private Skill activeSkill;
-     */
+
+    [SerializeField] private IWeapon[] weapons;
+    [SerializeField] private int currentWeapon;
+    [SerializeField] private GameObject weaponVolume;
+    private float timeOfLastAttack;
     
     public void Die()
     {
@@ -32,6 +31,30 @@ public class Character : MonoBehaviour
         }
         else { Destroy(this.gameObject); }
     }
+
+    public void Attack()
+    {
+        if (!CanAttack()) return;
+
+        timeOfLastAttack = Time.time;
+        weaponVolume.SetActive(true);
+
+        float attackTime = weapons[currentWeapon] == null ? 0.2f : weapons[currentWeapon].attackTime * 0.2f;
+        Invoke("StopAttack", attackTime);
+    }
+
+    public bool CanAttack()
+    {
+        float attackTime = weapons[currentWeapon] == null ? 1f : weapons[currentWeapon].attackTime;
+        if (Time.time - timeOfLastAttack < attackTime) return false;
+        return true;
+    }
+
+    public void StopAttack()
+    {
+        weaponVolume.SetActive(false);
+    }
+
     public GameManager GameManager
     {
         get { return gameManager; }
@@ -79,5 +102,10 @@ public class Character : MonoBehaviour
     public void ResetReset()
     {
         animator.SetBool("Reset", false);
+    }
+    public GameObject WeaponVolume
+    {
+        get { return weaponVolume; }
+        set { weaponVolume = value; }
     }
 }
