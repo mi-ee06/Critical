@@ -1,77 +1,31 @@
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using System;
 using UnityEngine;
 
-public class SlimeMovement
+public class SlimeMovement : MonoBehaviour
 {
-    Transform _slime;
-    Animator _animator;
+    public event Action OnDefeated;
 
-    public SlimeMovement(Transform slime, Animator animator)
+    [SerializeField] private SlimeAnimePlayer animePlayer;
+    [SerializeField] private sinsei.SlimeCore core;
+
+    private void Start()
     {
-        _slime = slime;
-        _animator = animator;
+        core.OnTouched += Defeat;
+        animePlayer.UpdateDirection();
     }
 
-    async public UniTask Rush(Transform target)
+    public void SetTrans()
     {
-        //PreRush‚ðŽn‚ß‚é
-        _animator.SetTrigger(SlimeAction.PreRush.ToString());
-
-        //PreRuah‚É“ü‚é
-        await intoAnime(SlimeAction.PreRush);
-
-        //PreRush‚©‚ç”²‚¯‚é
-        await outAnime(SlimeAction.PreRush);
-
-        //Rush‚ðŽn‚ß‚é
-        _animator.SetTrigger(SlimeAction.Rush.ToString());
-
-        //Rush‚É“ü‚é
-        await intoAnime(SlimeAction.Rush);
-
-        float duration = _animator.GetCurrentAnimatorStateInfo(0).length;
-
-        await _slime.DOMoveX(target.position.x, duration).ToUniTask();
-
-        //Rush‚©‚ç”²‚¯‚é
-        await outAnime(SlimeAction.Rush);
-
-        //ReturnRush‚ðŽn‚ß‚é
-        _animator.SetTrigger(SlimeAction.ReturnRush.ToString());
-
-        //ReturnRush‚É“ü‚é
-        await intoAnime(SlimeAction.ReturnRush);
-        //ReturnRush‚©‚ç”²‚¯‚é
-        await outAnime(SlimeAction.ReturnRush);
+        animePlayer.SetTrans(transform);
     }
 
-    async private UniTask intoAnime(SlimeAction action)
+    public void StartMoving()
     {
-        await UniTask.WaitUntil(() =>
-        {
-            var state = _animator.GetCurrentAnimatorStateInfo(0);
-            return state.IsName(action.ToString());
-        });
-        Debug.Log(action.ToString() + "‚É“ü‚Á‚½");
+        animePlayer.StartRush();
     }
 
-    async private UniTask outAnime(SlimeAction action)
+    private void Defeat()
     {
-        await UniTask.WaitUntil(() =>
-        {
-            var state = _animator.GetCurrentAnimatorStateInfo(0);
-            return !state.IsName(action.ToString());
-        });
-        Debug.Log(action.ToString() + "‚©‚ç”²‚¯‚½");
+        OnDefeated?.Invoke();
     }
-}
-
-public enum SlimeAction
-{
-    PreRush,
-    Rush,
-    ReturnRush,
-    Jump,
-    JumpReturn
 }

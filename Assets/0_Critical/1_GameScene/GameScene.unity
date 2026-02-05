@@ -1751,6 +1751,9 @@ MonoBehaviour:
   hostile: 0
   characterMovement: {fileID: 760649181}
   isPlayer: 1
+  weapons: []
+  currentWeapon: 0
+  weaponVolume: {fileID: 0}
 --- !u!114 &760649183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,6 +2999,7 @@ MonoBehaviour:
   audioSource: {fileID: 229629472}
   bgms:
   - {fileID: 8300000, guid: f48b7170278af4ac2bcd53f25b2455a4, type: 3}
+  initialTrack: 0
 --- !u!114 &1565540055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3011,6 +3015,7 @@ MonoBehaviour:
   uiElements:
   - {fileID: 594228966}
   - {fileID: 1344535623}
+  permenantUiIndex: 
 --- !u!114 &1565540056
 MonoBehaviour:
   m_ObjectHideFlags: 0
