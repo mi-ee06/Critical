@@ -6,6 +6,8 @@ public class SlimeAnimePlayer : MonoBehaviour
 {
     [Header("Components")]
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject normalCore;
+    [SerializeField] private GameObject jumpCore;
 
     [Header("Movement Settings")]
     [SerializeField] private float speed;
@@ -93,6 +95,9 @@ public class SlimeAnimePlayer : MonoBehaviour
             await UniTask.Yield(cts.Token);
         }
 
+        normalCore.SetActive(false);
+        jumpCore.SetActive(true);
+
         while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.75)
         {
             await UniTask.Yield(cts.Token);
@@ -114,6 +119,9 @@ public class SlimeAnimePlayer : MonoBehaviour
         Vector3 b = parent.position;
         b.y = 0;
         parent.position = b;
+
+        normalCore.SetActive(true);
+        jumpCore.SetActive(false);
 
         animator.SetTrigger(SlimeTrigger.ReturnJump.ToString());
     }

@@ -34,7 +34,7 @@ public class SlimeManager:MonoBehaviour
         movement.StartMoving();
     }
 
-    private void DestroySlime()
+    public void DestroySlime()
     {
         Destroy(slimeInstance);
     }
