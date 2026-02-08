@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SlimeManager:MonoBehaviour
 {
-    //Weaponタグのついたものにいたらと発火する
+    //Weaponタグのついたものに当たったら発火する
     public event Action OnDefeated;
 
     [SerializeField] private GameObject slime;
@@ -14,7 +14,7 @@ public class SlimeManager:MonoBehaviour
 
     private void Start()
     {
-        CreateSlime();
+        OnDefeated += DestroySlime;
     }
 
     //slimeのゲームオブジェクトを出す
@@ -22,10 +22,8 @@ public class SlimeManager:MonoBehaviour
     {
         slimeInstance = Instantiate(slime, spawnPoint.position, spawnPoint.rotation);
         movement = slimeInstance.GetComponent<SlimeMovement>();
-        movement.OnDefeated += () => OnDefeated?.Invoke();
-        OnDefeated += DestroySlime;
+        movement.OnDefeated += Handler;
         movement.SetTrans();
-        StartSlime();
     }
 
     //slimeを動き出すときに使う
@@ -36,6 +34,12 @@ public class SlimeManager:MonoBehaviour
 
     public void DestroySlime()
     {
+        OnDefeated -= Handler;
         Destroy(slimeInstance);
+    }
+
+    private void Handler()
+    {
+        OnDefeated?.Invoke();
     }
 }

@@ -4,7 +4,7 @@ namespace sinsei
 {
     public class SlimeCore:MonoBehaviour
     {
-        public Action OnTouched;
+        public event Action OnTouched;
 
         //Weaponタグのついたオブジェクトに触れたら発火
         private void OnTriggerEnter(Collider other)
