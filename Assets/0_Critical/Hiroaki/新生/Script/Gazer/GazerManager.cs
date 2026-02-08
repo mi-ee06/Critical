@@ -19,7 +19,7 @@ public class GazerManager:MonoBehaviour
 
     public void StartGazer()
     {
-
+        movement.SetCanMove(true);
     }
 
     public void DestroyGazer()
