@@ -9,14 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/0_Critical/dstol/Scenes/Tutorial.unity
-    guid: c857a389642894233ae03f2760df1967
+    path: "Assets/0_Critical/\u306D\u3053\u30BE\u30ED\u30A2/Scene/TitleScene.unity"
+    guid: 8d95f6479fb932a45868d6b7fdd11766
   - enabled: 1
-    path: Assets/0_Critical/1_GameScene/GameScene.unity
-    guid: e849e3a462cbade4e80cd2e7cfe18b7f
-  - enabled: 1
-    path: Assets/0_Critical/dstol/Scenes/Syouri.unity
-    guid: 8b676e7194e0242b3be6a5c2945ed04b
+    path: "Assets/0_Critical/\u306D\u3053\u30BE\u30ED\u30A2/Scene/GameScene.unity"
+    guid: be39b28a239809740b449f85d74f1145
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 6c157337ef669435bb42f6b841933453, type: 3}
   m_UseUCBPForAssetBundles: 0
