@@ -45,7 +45,7 @@ public class PlayerInput
 
         if(attackInput)
         {
-            owner.DelayedAttack();
+            owner.Inventory.DelayedAttack();
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))

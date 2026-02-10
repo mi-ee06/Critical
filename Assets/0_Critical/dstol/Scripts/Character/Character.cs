@@ -13,9 +13,7 @@ public class Character : MonoBehaviour
     [SerializeField] private bool isPlayer;
 
     [SerializeField] private IWeapon[] weapons;
-    [SerializeField] private int currentWeapon;
-    [SerializeField] private GameObject weaponVolume;
-    private float timeOfLastAttack;
+    [SerializeField] private Inventory inventory;
     
     public void Die()
     {
@@ -30,37 +28,6 @@ public class Character : MonoBehaviour
             characterMovement.Rb.linearVelocity = new Vector3(0f, characterMovement.Rb.linearVelocity.y, 0f);
         }
         else { Destroy(this.gameObject); }
-    }
-
-    public void DelayedAttack()
-    {
-        Invoke("Attack", weapons[currentWeapon] == null ? 0.3f : weapons[currentWeapon].attackTime);
-    }
-
-    public void Attack()
-    {
-        if (!CanAttack()) return;
-
-        timeOfLastAttack = Time.time;
-        weaponVolume.SetActive(true);
-        animator.Play("Attacking");
-        animator.SetBool("Attacking", true);
-
-        float attackTime = weapons[currentWeapon] == null ? 0.2f : weapons[currentWeapon].attackTime * 0.2f;
-        Invoke("StopAttack", attackTime);
-    }
-
-    public bool CanAttack()
-    {
-        float attackTime = weapons[currentWeapon] == null ? 1f : weapons[currentWeapon].attackTime;
-        if (Time.time - timeOfLastAttack < attackTime) return false;
-        return true;
-    }
-
-    public void StopAttack()
-    {
-        animator.SetBool("Attacking", false);
-        weaponVolume.SetActive(false);
     }
 
     public GameManager GameManager
@@ -111,9 +78,8 @@ public class Character : MonoBehaviour
     {
         animator.SetBool("Reset", false);
     }
-    public GameObject WeaponVolume
+    public Inventory Inventory
     {
-        get { return weaponVolume; }
-        set { weaponVolume = value; }
+        get { return inventory; }
     }
 }
