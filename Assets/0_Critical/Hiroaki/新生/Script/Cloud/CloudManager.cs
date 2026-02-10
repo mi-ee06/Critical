@@ -4,9 +4,9 @@ using UnityEngine.UI;
 using DG.Tweening;
 using Cysharp.Threading.Tasks;
 
-public class CloudManager:MonoBehaviour
+public class CloudManager:EnemyManagerBase
 {
-    public event Action OnDefeated;
+    override public event Action OnDefeated;
 
     [SerializeField] Transform player;
     [SerializeField] private Transform spawnPoint;
@@ -19,7 +19,7 @@ public class CloudManager:MonoBehaviour
     private CloudMovement movement;
     private int clearCount = 0;
 
-    public void CreateCloud()
+    override public void CreateEnemy()
     {
         cloudInstance = Instantiate(cloudPrefab, spawnPoint);
         movement=cloudInstance.GetComponent<CloudMovement>();
@@ -46,12 +46,12 @@ public class CloudManager:MonoBehaviour
         if (clearCount == 5)
         {
             movement.SetAttack(false);
-            DestroyCloud();
+            DestroyEnemy();
             OnDefeated?.Invoke();
         }
     }
 
-    public  void DestroyCloud()
+    override public  void DestroyEnemy()
     {
         Destroy(cloudInstance);
         Destroy(steamInstance.gameObject);
