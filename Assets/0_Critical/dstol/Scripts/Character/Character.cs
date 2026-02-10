@@ -32,12 +32,19 @@ public class Character : MonoBehaviour
         else { Destroy(this.gameObject); }
     }
 
+    public void DelayedAttack()
+    {
+        Invoke("Attack", weapons[currentWeapon] == null ? 0.3f : weapons[currentWeapon].attackTime);
+    }
+
     public void Attack()
     {
         if (!CanAttack()) return;
 
         timeOfLastAttack = Time.time;
         weaponVolume.SetActive(true);
+        animator.Play("Attacking");
+        animator.SetBool("Attacking", true);
 
         float attackTime = weapons[currentWeapon] == null ? 0.2f : weapons[currentWeapon].attackTime * 0.2f;
         Invoke("StopAttack", attackTime);
@@ -52,6 +59,7 @@ public class Character : MonoBehaviour
 
     public void StopAttack()
     {
+        animator.SetBool("Attacking", false);
         weaponVolume.SetActive(false);
     }
 
