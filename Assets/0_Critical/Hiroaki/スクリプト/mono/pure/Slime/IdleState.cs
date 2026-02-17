@@ -8,6 +8,7 @@ public class IdleState:IState<SlimeStateData>
     private OnRoom _onRoom;
     public IdleState(SlimeRefs refs,OnRoom onRoom)
     {
+        typeof(IdleState).GetHashCode();
         _refs = refs;
         _onRoom = onRoom;
     }
@@ -22,6 +23,7 @@ public class IdleState:IState<SlimeStateData>
             stopTime += Time.deltaTime;
             if (stopTime > 1)
             {
+               //  ChangeState<RushState>();
                 return data.RushTrigger;
             }
         }

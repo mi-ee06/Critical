@@ -3,6 +3,8 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] uiElements;
+    [SerializeField] private int[] permenantUiIndex;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,7 +38,18 @@ public class UIManager : MonoBehaviour
     {
         for(int i = 0; i < uiElements.Length; i++)
         {
-            uiElements[i].SetActive(false);
+            bool active = false;
+            for(int j = 0; j < permenantUiIndex.Length; j++)
+            {
+                if (i == permenantUiIndex[j])
+                {
+                    active = true;
+                    break;
+                }
+                
+            }
+           
+            uiElements[i].SetActive(active);
         }
     }
     public GameObject[] UIElements

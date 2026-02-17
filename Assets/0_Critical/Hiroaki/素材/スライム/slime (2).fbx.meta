@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|jump"
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|jump"
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|rush_pre (1)"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|rush_pre"
       internalID: -6330136862491513495
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

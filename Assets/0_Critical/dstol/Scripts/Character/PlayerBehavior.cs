@@ -21,6 +21,7 @@ public class PlayerBehavior : MonoBehaviour
         character.StartPosition = transform.position;
         playerInput.previousJumpHeld = false;
         movement.Stepping = false;
+        character.Inventory.KillEnemyTrigger.SetActive(false);
     }
 
     void Update()

@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 5412508495929151102}
   m_Layer: 8
   m_Name: normalCore
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -477,6 +477,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: -1008740736733763435, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -504,6 +508,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1422188000619840691, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
       propertyPath: m_Layer
@@ -542,6 +550,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1795152098182507992}
   m_SourcePrefab: {fileID: 100100000, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
+--- !u!1 &2588286454213887204 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1018664272722485354, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
+  m_PrefabInstance: {fileID: 5924356583975902066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6178150965176974489 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 62670d422e649b44ea44bad6113c48ab, type: 3}
@@ -586,6 +599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dbc0e8d4c1845978e2462b8b5bcb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacklist:
+  - {fileID: 2588286454213887204}
 --- !u!136 &382674243079420338
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -626,3 +641,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73dbc0e8d4c1845978e2462b8b5bcb34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blacklist: []

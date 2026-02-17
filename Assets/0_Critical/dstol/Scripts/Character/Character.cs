@@ -11,12 +11,9 @@ public class Character : MonoBehaviour
 
     [SerializeField] private Movement characterMovement;
     [SerializeField] private bool isPlayer;
-    /*
-     * [SerializeField] private Weapon[] weapons
-     * [SerializeField] private Weapon activeWeapon;
-     * [SerializeField] private Skill[] skills;
-     * [SerializeField] private Skill activeSkill;
-     */
+
+    [SerializeField] private IWeapon[] weapons;
+    [SerializeField] private Inventory inventory;
     
     public void Die()
     {
@@ -26,12 +23,13 @@ public class Character : MonoBehaviour
             Debug.Log("Death method called");
             alive = false;
             animator.SetBool("Alive", false);
-            Invoke("ResetDeathAnimation", 0.1f);
+            Invoke("ResetDeathAnimation", 0.2f);
             Invoke("GameOverScreen", 3f);
             characterMovement.Rb.linearVelocity = new Vector3(0f, characterMovement.Rb.linearVelocity.y, 0f);
         }
         else { Destroy(this.gameObject); }
     }
+
     public GameManager GameManager
     {
         get { return gameManager; }
@@ -79,5 +77,9 @@ public class Character : MonoBehaviour
     public void ResetReset()
     {
         animator.SetBool("Reset", false);
+    }
+    public Inventory Inventory
+    {
+        get { return inventory; }
     }
 }
